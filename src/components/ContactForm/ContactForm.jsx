@@ -36,7 +36,7 @@ export function ContactForm() {
       phone: number,
     };
 
-    dispatch(addContactThunk(newContact));
+    dispatch(addContactThunk(newContact)); // 💙💛 передаем данные контакта в createAsyncThunk для последующей отправки на backend
     setName('');
     setNumber('');
   }

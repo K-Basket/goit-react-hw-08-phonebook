@@ -8,15 +8,15 @@ export const fetchContactsThunk = createAsyncThunk('contacts/fetchAll', () => {
 
 export const deleteContactThunk = createAsyncThunk(
   'contacts/deleteContact',
-  id => {
-    return deleteContact(id); // Запрос на backend
+  contactId => {
+    return deleteContact(contactId); // Запрос на backend
   }
 );
 
 export const addContactThunk = createAsyncThunk(
   'contacts/addContact',
-  newContact => {
-    return addContact(newContact); // Запрос на backend
+  contact => {
+    return addContact(contact); // 💙💛 contact получает данные и функция отправляет на backend и возвращает объект. Запрос на backend
   }
 );
 
@@ -63,13 +63,11 @@ export const listSlice = createSlice({
       .addCase(fetchContactsThunk.fulfilled, handleFulfilled)
       .addCase(addContactThunk.fulfilled, handleAddContact)
       .addCase(deleteContactThunk.fulfilled, handleDelete)
-      // т.к. вызов .addCase(fetchContactsThunk.pending, handlePanding) часто дублируется
-      // и чтобы повторно его не вызывать применим addMatcher
       .addMatcher(action => {
-        return action.type.endsWith('/pending');
+        return action.type.endsWith('/pending'); // ко всем .pending применится handlePanding
       }, handlePanding)
       .addMatcher(action => {
-        return action.type.endsWith('/rejected');
+        return action.type.endsWith('/rejected'); // ко всем .rejected применится handleRejected
       }, handleRejected);
   },
 
