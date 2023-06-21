@@ -1,13 +1,16 @@
 import { useEffect } from 'react';
 import css from './ContactList.module.css';
 import { useDispatch, useSelector } from 'react-redux';
-import { deleteContactThunk, fetchContactsThunk } from 'store/list/listSlice';
 import {
   errorSelector,
   isLoadingSelector,
   itemsSelector,
   listSelector,
-} from 'store/list/selectorsList';
+} from 'redux/contacts/selectors';
+import {
+  deleteContactThunk,
+  fetchContactsThunk,
+} from 'redux/contacts/operations';
 
 export function ContactList() {
   const filter = useSelector(listSelector);

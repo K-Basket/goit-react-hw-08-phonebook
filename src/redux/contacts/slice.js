@@ -1,24 +1,9 @@
-import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
-import { addContact, deleteContact, getContacts } from 'api/contactsApi';
-
-// делаем запрос на backend методом createAsyncThunk, создает автоматом экшены pending, fulfilled, rejected
-export const fetchContactsThunk = createAsyncThunk('contacts/fetchAll', () => {
-  return getContacts(); // Запрос на backend
-});
-
-export const deleteContactThunk = createAsyncThunk(
-  'contacts/deleteContact',
-  contactId => {
-    return deleteContact(contactId); // Запрос на backend
-  }
-);
-
-export const addContactThunk = createAsyncThunk(
-  'contacts/addContact',
-  contact => {
-    return addContact(contact); // 💙💛 contact получает данные и функция отправляет на backend и возвращает объект. Запрос на backend
-  }
-);
+import { createSlice } from '@reduxjs/toolkit';
+import {
+  addContactThunk,
+  deleteContactThunk,
+  fetchContactsThunk,
+} from './operations';
 
 const handlePanding = state => {
   state.isLoading = true;
@@ -54,9 +39,9 @@ const initialState = {
   filter: '',
 };
 
-export const listSlice = createSlice({
+export const contactsSlice = createSlice({
   name: 'contacts',
-  initialState: initialState,
+  initialState,
 
   extraReducers: builder => {
     builder
@@ -78,5 +63,5 @@ export const listSlice = createSlice({
   },
 });
 
-export const listReducer = listSlice.reducer;
-export const { setFilter } = listSlice.actions;
+export const contactsReducer = contactsSlice.reducer;
+export const { setFilter } = contactsSlice.actions;

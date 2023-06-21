@@ -1,9 +1,9 @@
 import Notiflix from 'notiflix';
 import css from './ContactForm.module.css';
 import { useDispatch, useSelector } from 'react-redux';
-import { addContactThunk } from 'store/list/listSlice';
-import { itemsSelector } from 'store/list/selectorsList';
+import { itemsSelector } from 'redux/contacts/selectors';
 import { useState } from 'react';
+import { addContactThunk } from 'redux/contacts/operations';
 
 export function ContactForm() {
   const [name, setName] = useState('');
