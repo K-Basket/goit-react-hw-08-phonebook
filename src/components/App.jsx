@@ -1,9 +1,9 @@
 import { Route, Routes } from 'react-router-dom';
 import Layout from './Layout/Layout';
-import Home from 'Pages/Home/Home';
-import Register from 'Pages/Register/Register';
-import Login from 'Pages/Login/Login';
-import Contacts from 'Pages/Contacts/Contacts';
+import Home from 'pages/Home/Home';
+import Register from 'pages/Register/Register';
+import Login from 'pages/Login/Login';
+import Contacts from 'pages/Contacts/Contacts';
 
 export function App() {
   return (
