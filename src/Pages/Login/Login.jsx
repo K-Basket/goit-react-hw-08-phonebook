@@ -1,6 +1,10 @@
+import { useDispatch } from 'react-redux';
 import css from './Login.module.css';
+import { loginThunk } from 'redux/auth/operations';
 
 const Login = () => {
+  const dispatch = useDispatch();
+
   const handleSubmit = evt => {
     evt.preventDefault();
     const form = evt.target;
@@ -9,6 +13,7 @@ const Login = () => {
       email: form.elements.email.value,
       password: form.elements.password.value,
     };
+    dispatch(loginThunk(userLoginData));
     form.reset();
 
     console.log('submit Login >>', userLoginData);

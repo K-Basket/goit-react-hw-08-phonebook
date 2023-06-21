@@ -34,12 +34,12 @@ export function ContactList() {
     <>
       {isLoading && !error && <p>Request in progress...</p>}
       <ul>
-        {getFiltered().map(({ id, name, phone }) => (
+        {getFiltered().map(({ id, name, number }) => (
           <li key={id}>
             <div className={css.item}>
               <p>
                 <span>{name}</span>
-                <span>: {phone}</span>
+                <span>: {number}</span>
               </p>
 
               <button onClick={() => dispatch(deleteContactThunk(id))}>

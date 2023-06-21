@@ -1,44 +1,87 @@
-// 💙💛
 import axios from 'axios';
 import { createAsyncThunk } from '@reduxjs/toolkit';
 
-axios.defaults.baseURL = 'https://648d87dc2de8d0ea11e7f308.mockapi.io/contacts';
-
 export const fetchContactsThunk = createAsyncThunk(
   'contacts/fetchAll',
-  async () => {
+  async (_, thunkAPI) => {
     try {
-      const { data } = await axios();
+      const { data } = await axios('/contacts');
 
       return data;
     } catch (error) {
-      console.warn(error);
+      return thunkAPI.rejectWithValue(error.message);
     }
   }
 );
 
 export const addContactThunk = createAsyncThunk(
   'contacts/addContact',
-  async contact => {
+  async (contact, thunkAPI) => {
     try {
-      const { data } = await axios.post(``, contact);
+      const { data } = await axios.post('/contacts', contact);
 
       return data;
     } catch (error) {
-      console.warn(error);
+      return thunkAPI.rejectWithValue(error.message);
     }
   }
 );
 
 export const deleteContactThunk = createAsyncThunk(
   'contacts/deleteContact',
-  async id => {
+  async (id, thunkAPI) => {
     try {
-      const { data } = await axios.delete(`/${id}`);
+      const { data } = await axios.delete(`/contacts/${id}`);
 
       return data;
     } catch (error) {
-      console.warn(error);
+      return thunkAPI.rejectWithValue(error.message);
     }
   }
 );
+
+// export const fetchContactsThunk = createAsyncThunk(
+//   'contacts/fetchAll',
+//   async () => {
+//     try {
+//       const { data } = await axios(
+//         'https://648d87dc2de8d0ea11e7f308.mockapi.io/contacts'
+//       );
+
+//       return data;
+//     } catch (error) {
+//       console.warn(error);
+//     }
+//   }
+// );
+
+// export const addContactThunk = createAsyncThunk(
+//   'contacts/addContact',
+//   async contact => {
+//     try {
+//       const { data } = await axios.post(
+//         'https://648d87dc2de8d0ea11e7f308.mockapi.io/contacts',
+//         contact
+//       );
+
+//       return data;
+//     } catch (error) {
+//       console.warn(error);
+//     }
+//   }
+// );
+
+// export const deleteContactThunk = createAsyncThunk(
+//   'contacts/deleteContact',
+//   async id => {
+//     try {
+//       const { data } = await axios.delete(
+//         `https://648d87dc2de8d0ea11e7f308.mockapi.io/contacts/${id}`
+//       );
+
+//       return data;
+//     } catch (error) {
+//       console.warn(error);
+//     }
+//   }
+// );

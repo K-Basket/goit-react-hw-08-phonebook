@@ -1,6 +1,14 @@
+import { useDispatch, useSelector } from 'react-redux';
 import css from './Register.module.css';
+import { registerThunk } from 'redux/auth/operations';
+import { isLoggetInSelector } from 'redux/auth/selectors';
+import { useNavigate } from 'react-router-dom';
 
 const Register = () => {
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
+  const isLoggetIn = useSelector(isLoggetInSelector);
+
   const handleSubmit = evt => {
     evt.preventDefault();
     const form = evt.target;
@@ -10,10 +18,14 @@ const Register = () => {
       email: form.elements.email.value,
       password: form.elements.password.value,
     };
+
+    dispatch(registerThunk(userRegisterData));
     form.reset();
 
     console.log('submit Register >>', userRegisterData);
   };
+
+  if (isLoggetIn) navigate('/contacts');
 
   return (
     <>
