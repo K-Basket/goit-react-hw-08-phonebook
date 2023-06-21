@@ -1,21 +1,44 @@
+// 💙💛
+import axios from 'axios';
 import { createAsyncThunk } from '@reduxjs/toolkit';
-import { addContact, deleteContact, getContacts } from 'api/contactsApi';
 
-// делаем запрос на backend методом createAsyncThunk, создает автоматом экшены pending, fulfilled, rejected
-export const fetchContactsThunk = createAsyncThunk('contacts/fetchAll', () => {
-  return getContacts(); // Запрос на backend
-});
+axios.defaults.baseURL = 'https://648d87dc2de8d0ea11e7f308.mockapi.io/contacts';
 
-export const deleteContactThunk = createAsyncThunk(
-  'contacts/deleteContact',
-  contactId => {
-    return deleteContact(contactId); // Запрос на backend
+export const fetchContactsThunk = createAsyncThunk(
+  'contacts/fetchAll',
+  async () => {
+    try {
+      const { data } = await axios();
+
+      return data;
+    } catch (error) {
+      console.warn(error);
+    }
   }
 );
 
 export const addContactThunk = createAsyncThunk(
   'contacts/addContact',
-  contact => {
-    return addContact(contact); // 💙💛 contact получает данные и функция отправляет на backend и возвращает объект. Запрос на backend
+  async contact => {
+    try {
+      const { data } = await axios.post(``, contact);
+
+      return data;
+    } catch (error) {
+      console.warn(error);
+    }
+  }
+);
+
+export const deleteContactThunk = createAsyncThunk(
+  'contacts/deleteContact',
+  async id => {
+    try {
+      const { data } = await axios.delete(`/${id}`);
+
+      return data;
+    } catch (error) {
+      console.warn(error);
+    }
   }
 );
