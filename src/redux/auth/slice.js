@@ -1,4 +1,9 @@
-import { loginThunk, logoutThunk, registerThunk } from './operations';
+import {
+  loginThunk,
+  logoutThunk,
+  refreshUserThunk,
+  registerThunk,
+} from './operations';
 
 const { createSlice } = require('@reduxjs/toolkit');
 
@@ -29,6 +34,10 @@ const authSlise = createSlice({
         state.user = { name: null, email: null };
         state.token = null;
         state.isLoggetIn = false;
+      })
+      .addCase(refreshUserThunk.fulfilled, (state, action) => {
+        state.user = action.payload;
+        state.isLoggetIn = true;
       })
       .addMatcher(
         action => {

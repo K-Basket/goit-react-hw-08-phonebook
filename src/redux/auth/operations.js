@@ -54,3 +54,23 @@ export const logoutThunk = createAsyncThunk(
     }
   }
 );
+// позволяет при перезагрузке не разлогиниваться
+export const refreshUserThunk = createAsyncThunk(
+  'auth/refresh',
+  async (_, thunkAPI) => {
+    // проверка наличия токена в redux state (т.е. проверяем залогинен user или нет)
+    const state = thunkAPI.getState(); // получем весь state из Redux (thunkAPI позволяет это сделать)
+    const token = state.auth.token; // аналогичная запись --> /const { token } = thunkAPI.getState().auth;/
+    if (!token) {
+      return thunkAPI.rejectWithValue('No valid token');
+    } // если user не залогинен,тогда выйти
+
+    try {
+      setAuthHeader(token); // если user залогинен, прикладываем токен к http-запросу
+      const { data } = await axios.get('/users/current'); // http-запрос на refreshUser
+      return data;
+    } catch (error) {
+      return thunkAPI.rejectWithValue(error.message);
+    }
+  }
+);
