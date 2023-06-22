@@ -1,13 +1,9 @@
-import { useDispatch, useSelector } from 'react-redux';
+import { useDispatch } from 'react-redux';
 import css from './Register.module.css';
 import { registerThunk } from 'redux/auth/operations';
-import { isLoggetInSelector } from 'redux/auth/selectors';
-import { useNavigate } from 'react-router-dom';
 
 const Register = () => {
   const dispatch = useDispatch();
-  const navigate = useNavigate();
-  const isLoggetIn = useSelector(isLoggetInSelector);
 
   const handleSubmit = evt => {
     evt.preventDefault();
@@ -24,8 +20,6 @@ const Register = () => {
 
     console.log('submit Register >>', userRegisterData);
   };
-
-  if (isLoggetIn) navigate('/contacts');
 
   return (
     <>
