@@ -19,6 +19,7 @@ export function App() {
     dispatch(refreshUserThunk());
   }, [dispatch]);
 
+  // ========================================================= Варииант с пропсами
   return isRefreshing ? (
     'Fetching user data...'
   ) : (
@@ -53,4 +54,43 @@ export function App() {
       </Routes>
     </>
   );
+
+  // ========================================================= Варииант с children
+  // return isRefreshing ? (
+  //   'Fetching user data...'
+  // ) : (
+  //   <>
+  //     <Routes>
+  //       <Route path="/" element={<Layout />}>
+  //         <Route index element={<Home />} />
+  //         <Route
+  //           path="register"
+  //           element={
+  //             <RestrictedRoute>
+  //               <Register />
+  //             </RestrictedRoute>
+  //           }
+  //         />
+  //         <Route
+  //           path="login"
+  //           element={
+  //             <RestrictedRoute>
+  //               <Login />
+  //             </RestrictedRoute>
+  //           }
+  //         />
+  //         <Route
+  //           path="contacts"
+  //           element={
+  //             <PrivateRoute>
+  //               <Contacts />
+  //             </PrivateRoute>
+  //           }
+  //         />
+
+  //         <Route path="*" element={<Home />} />
+  //       </Route>
+  //     </Routes>
+  //   </>
+  // );
 }
