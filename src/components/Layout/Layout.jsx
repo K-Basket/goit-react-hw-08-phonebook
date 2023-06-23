@@ -3,6 +3,7 @@ import UserMenu from 'components/UserMenu/UserMenu';
 import css from './Layout.module.css';
 import { useSelector } from 'react-redux';
 import { isLoggetInSelector } from 'redux/auth/selectors';
+import { Suspense } from 'react';
 
 const { Outlet, NavLink } = require('react-router-dom');
 
@@ -24,12 +25,13 @@ const Layout = () => {
             )}
           </div>
           {isLoggetIn ? <UserMenu /> : <AuthNav />}
-          {/* <NavLink to="/contacts">Contacts</NavLink> */}
         </nav>
       </header>
 
       <main>
-        <Outlet />
+        <Suspense fallback={null}>
+          <Outlet />
+        </Suspense>
       </main>
     </>
   );
