@@ -3,6 +3,7 @@ import {
   addContactThunk,
   deleteContactThunk,
   fetchContactsThunk,
+  patchContactThunk,
 } from './operations';
 
 const handlePanding = state => {
@@ -24,6 +25,26 @@ const handleAddContact = (state, { payload }) => {
   state.isLoading = false;
   state.items.push(payload);
   state.error = '';
+};
+// =====================================================================================
+const handlePatchContact = (state, { payload }) => {
+  state.isLoading = false;
+  const { id, name, number } = payload;
+  const contact = state.items.find(el => el.id === id);
+
+  contact.name = name;
+  contact.number = number;
+
+  // state.items.find(el => {
+  //   if (el.id === payload.id) {
+  //     el.name = payload.name;
+  //     el.number = payload.number;
+  //   }
+  // });
+
+  state.error = '';
+
+  console.log('payload Patch :>> ', payload);
 };
 
 const handleDelete = (state, { payload }) => {
@@ -47,6 +68,7 @@ export const contactsSlice = createSlice({
     builder
       .addCase(fetchContactsThunk.fulfilled, handleFulfilled)
       .addCase(addContactThunk.fulfilled, handleAddContact)
+      .addCase(patchContactThunk.fulfilled, handlePatchContact)
       .addCase(deleteContactThunk.fulfilled, handleDelete)
       .addMatcher(action => {
         return action.type.endsWith('/pending'); // ко всем .pending применится handlePanding

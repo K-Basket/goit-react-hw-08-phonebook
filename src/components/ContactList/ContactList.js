@@ -10,15 +10,17 @@ import {
 import {
   deleteContactThunk,
   fetchContactsThunk,
+  patchContactThunk,
 } from 'redux/contacts/operations';
 
 export function ContactList() {
-  const [update, setUpdate] = useState(false);
-
   const filter = useSelector(listSelector);
   const items = useSelector(itemsSelector);
   const isLoading = useSelector(isLoadingSelector);
   const error = useSelector(errorSelector);
+
+  const [isUpdate, setIsUpdate] = useState(false);
+  const [contactUpdate, setContactUpdate] = useState({});
 
   const dispatch = useDispatch();
 
@@ -33,33 +35,56 @@ export function ContactList() {
   }
 
   const handleContactUpdate = evt => {
-    setUpdate(true);
+    setIsUpdate(true);
+
     const getContactId = evt.target.dataset.id;
     const getContactUpdate = items.find(el => el.id === getContactId);
 
-    console.log('getContactId :>> ', getContactId);
-    console.log('items :>> ', getContactUpdate);
-    // console.log('contact update');
+    setContactUpdate(getContactUpdate); // записал в state из items
   };
 
-  const handleContactCorrect = () => {
-    console.log('sabmitCorrect :>> ');
+  // запись в стейт из поля input
+  const handleChange = evt => {
+    if (evt.target.name === 'name')
+      setContactUpdate(
+        prev => (prev = { ...prev, ...{ name: evt.target.value } })
+      );
+    if (evt.target.name === 'number')
+      setContactUpdate(
+        prev => (prev = { ...prev, ...{ number: evt.target.value } })
+      );
+  };
+
+  const handleContactCorrect = evt => {
+    evt.preventDefault();
+    dispatch(patchContactThunk(contactUpdate));
+    setIsUpdate(false);
   };
 
   return (
     <>
-      {/* {console.log('update >>', update)} */}
-
-      {update && (
+      {isUpdate && (
         <form onSubmit={handleContactCorrect}>
           <label>
-            Name
-            <input type="text" name="name" />
+            Name update
+            <input
+              type="text"
+              name="name"
+              // value={contactUpdate.name}
+              placeholder={contactUpdate.name}
+              onChange={handleChange}
+            />
           </label>
 
           <label>
-            Number
-            <input type="tel" name="number" />
+            Number update
+            <input
+              type="tel"
+              name="number"
+              // value={contactUpdate.number}
+              placeholder={contactUpdate.number}
+              onChange={handleChange}
+            />
           </label>
 
           <button type="submit">Correct contact</button>
