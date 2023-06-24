@@ -15,7 +15,7 @@ const handleRejected = (state, { payload }) => {
   state.error = payload;
 };
 
-const handleFulfilled = (state, { payload }) => {
+const handleFetchContacts = (state, { payload }) => {
   state.isLoading = false;
   state.items = payload;
   state.error = '';
@@ -60,7 +60,7 @@ export const contactsSlice = createSlice({
 
   extraReducers: builder => {
     builder
-      .addCase(fetchContactsThunk.fulfilled, handleFulfilled)
+      .addCase(fetchContactsThunk.fulfilled, handleFetchContacts)
       .addCase(addContactThunk.fulfilled, handleAddContact)
       .addCase(patchContactThunk.fulfilled, handlePatchContact)
       .addCase(deleteContactThunk.fulfilled, handleDelete)
@@ -80,4 +80,4 @@ export const contactsSlice = createSlice({
 });
 
 export const contactsReducer = contactsSlice.reducer;
-export const { setFilter } = contactsSlice.actions;
+export const { setFilter, setIsLoading } = contactsSlice.actions;

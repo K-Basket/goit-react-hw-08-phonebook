@@ -12,6 +12,7 @@ import {
   fetchContactsThunk,
   patchContactThunk,
 } from 'redux/contacts/operations';
+import { Loading } from 'components/Loading/Loading';
 
 export function ContactList() {
   const filter = useSelector(listSelector);
@@ -91,7 +92,7 @@ export function ContactList() {
         </form>
       )}
 
-      {isLoading && !error && <p>Request in progress...</p>}
+      {isLoading && !error && <Loading />}
 
       <ul>
         {getFiltered().map(({ id, name, number }) => (
