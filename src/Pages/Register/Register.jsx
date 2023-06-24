@@ -1,9 +1,14 @@
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import css from './Register.module.css';
 import { registerThunk } from 'redux/auth/operations';
+import { Loader } from 'components/Loader/Loader';
+import { errorSelector, isLoadingSelector } from 'redux/auth/selectors';
 
 const Register = () => {
   const dispatch = useDispatch();
+
+  const isLoading = useSelector(isLoadingSelector);
+  const error = useSelector(errorSelector);
 
   const handleSubmit = evt => {
     evt.preventDefault();
@@ -23,8 +28,7 @@ const Register = () => {
 
   return (
     <>
-      <h3>Register page</h3>
-      <p>публичный маршрут регистрации нового пользователя с формой</p>
+      {isLoading && !error && <Loader />}
 
       <form className={css.form} onSubmit={handleSubmit} autoComplete="off">
         <label className={css.label}>

@@ -19,6 +19,7 @@ const handleRegisterThunk = (state, { payload }) => {
   state.user = payload.user; // записали в state name, email пользователя
   state.token = payload.token; // записали в state token, token пользователя
   state.isLoggetIn = true;
+  state.isLoading = false;
 
   console.log('registerThunk/payload :>> ', payload);
 };
@@ -27,17 +28,20 @@ const handleLoginThunk = (state, { payload }) => {
   state.user = payload.user;
   state.token = payload.token;
   state.isLoggetIn = true;
+  state.isLoading = false;
 };
 
-const handleLogoutThunk = (state, { payload }) => {
+const handleLogoutThunk = state => {
   state.user = { name: null, email: null };
   state.token = null;
   state.isLoggetIn = false;
+  state.isLoading = false;
 };
 
 const handleRefreshUserThunk = (state, { payload }) => {
   state.user = payload;
   state.isLoggetIn = true;
+  state.isLoading = false;
 };
 
 const initialState = {

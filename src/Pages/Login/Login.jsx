@@ -1,9 +1,14 @@
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import css from './Login.module.css';
 import { loginThunk } from 'redux/auth/operations';
+import { errorSelector, isLoadingSelector } from 'redux/auth/selectors';
+import { Loader } from 'components/Loader/Loader';
 
 const Login = () => {
   const dispatch = useDispatch();
+
+  const isLoading = useSelector(isLoadingSelector);
+  const error = useSelector(errorSelector);
 
   const handleSubmit = evt => {
     evt.preventDefault();
@@ -21,8 +26,7 @@ const Login = () => {
 
   return (
     <>
-      <h3>Login page</h3>
-      <p>публичный маршрут логина существующего пользователя с формой</p>
+      {isLoading && !error && <Loader />}
 
       <form className={css.form} onSubmit={handleSubmit} autoComplete="off">
         <label className={css.label}>
