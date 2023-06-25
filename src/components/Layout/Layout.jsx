@@ -4,6 +4,7 @@ import css from './Layout.module.css';
 import { useSelector } from 'react-redux';
 import { isLoggetInSelector } from 'redux/auth/selectors';
 import { Suspense } from 'react';
+import { Section } from 'components/Section/Section';
 
 const { Outlet, NavLink } = require('react-router-dom');
 
@@ -13,25 +14,29 @@ const Layout = () => {
   return (
     <>
       <header>
-        <nav className={css.nav}>
-          <div>
-            <NavLink to="/" className={css.link}>
-              Home
-            </NavLink>
-            {isLoggetIn && (
-              <NavLink to="/contacts" className={css.link}>
-                Contacts
+        <Section>
+          <nav className={css.nav}>
+            <div>
+              <NavLink to="/" className={css.link}>
+                Home
               </NavLink>
-            )}
-          </div>
-          {isLoggetIn ? <UserMenu /> : <AuthNav />}
-        </nav>
+              {isLoggetIn && (
+                <NavLink to="/contacts" className={css.link}>
+                  Contacts
+                </NavLink>
+              )}
+            </div>
+            {isLoggetIn ? <UserMenu /> : <AuthNav />}
+          </nav>
+        </Section>
       </header>
 
       <main>
-        <Suspense fallback={null}>
-          <Outlet />
-        </Suspense>
+        <Section>
+          <Suspense fallback={null}>
+            <Outlet />
+          </Suspense>
+        </Section>
       </main>
     </>
   );
