@@ -1,6 +1,7 @@
 import { ContactForm } from 'components/ContactForm';
 import { ContactList } from 'components/ContactList';
 import { Filter } from 'components/Filter';
+import { UpdateForm } from 'components/UpdateForm/UpdateForm';
 import { useSelector } from 'react-redux';
 import { userSelector } from 'redux/auth/selectors';
 
@@ -16,6 +17,7 @@ const Contacts = () => {
 
       <h2>{`${user.name}, these are your contacts`}</h2>
       <Filter />
+      <UpdateForm />
       <ContactList />
     </>
   );

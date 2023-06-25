@@ -3,3 +3,4 @@ export const isLoadingSelector = state => state.contacts.isLoading;
 export const errorSelector = state => state.contacts.error;
 export const listSelector = state => state.contacts.filter;
 export const contactUpdateSelector = state => state.contacts.contactUpdate;
+export const isUpdateSelector = state => state.contacts.isUpdate;
