@@ -6,7 +6,7 @@ import { Suspense } from 'react';
 import { Section } from 'components/Section/Section';
 import { NavLinkSt, NavSt } from './Styled';
 
-const { Outlet, NavLink } = require('react-router-dom');
+const { Outlet } = require('react-router-dom');
 
 const Layout = () => {
   const isLoggetIn = useSelector(isLoggetInSelector);
