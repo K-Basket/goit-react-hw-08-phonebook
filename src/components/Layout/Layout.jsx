@@ -1,10 +1,10 @@
 import AuthNav from 'components/AuthNav/AuthNav';
 import UserMenu from 'components/UserMenu/UserMenu';
-import css from './Layout.module.css';
 import { useSelector } from 'react-redux';
 import { isLoggetInSelector } from 'redux/auth/selectors';
 import { Suspense } from 'react';
 import { Section } from 'components/Section/Section';
+import { NavLinkSt, NavSt } from './Styled';
 
 const { Outlet, NavLink } = require('react-router-dom');
 
@@ -15,19 +15,13 @@ const Layout = () => {
     <>
       <header>
         <Section>
-          <nav className={css.nav}>
+          <NavSt>
             <div>
-              <NavLink to="/" className={css.link}>
-                Home
-              </NavLink>
-              {isLoggetIn && (
-                <NavLink to="/contacts" className={css.link}>
-                  Contacts
-                </NavLink>
-              )}
+              <NavLinkSt to="/">Home</NavLinkSt>
+              {isLoggetIn && <NavLinkSt to="/contacts">Contacts</NavLinkSt>}
             </div>
             {isLoggetIn ? <UserMenu /> : <AuthNav />}
-          </nav>
+          </NavSt>
         </Section>
       </header>
 
