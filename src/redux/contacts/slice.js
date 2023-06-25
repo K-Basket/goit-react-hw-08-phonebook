@@ -52,6 +52,7 @@ const initialState = {
   isLoading: false,
   error: null,
   filter: '',
+  contactUpdate: {},
 };
 
 export const contactsSlice = createSlice({
@@ -76,8 +77,11 @@ export const contactsSlice = createSlice({
     setFilter: (state, action) => {
       state.filter = action.payload;
     },
+    setContactUpdate: (state, action) => {
+      state.contactUpdate = action.payload;
+    },
   },
 });
 
 export const contactsReducer = contactsSlice.reducer;
-export const { setFilter, setIsLoading } = contactsSlice.actions;
+export const { setFilter, setContactUpdate } = contactsSlice.actions;

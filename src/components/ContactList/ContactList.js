@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react';
 import css from './ContactList.module.css';
 import { useDispatch, useSelector } from 'react-redux';
 import {
+  contactUpdateSelector,
   errorSelector,
   isLoadingSelector,
   itemsSelector,
@@ -13,15 +14,17 @@ import {
   patchContactThunk,
 } from 'redux/contacts/operations';
 import { Loader } from 'components/Loader/Loader';
+import { setContactUpdate } from 'redux/contacts/slice';
 
 export function ContactList() {
   const filter = useSelector(listSelector);
   const items = useSelector(itemsSelector);
   const isLoading = useSelector(isLoadingSelector);
   const error = useSelector(errorSelector);
+  const contactUpdate = useSelector(contactUpdateSelector);
 
   const [isUpdate, setIsUpdate] = useState(false);
-  const [contactUpdate, setContactUpdate] = useState({});
+  // const [contactUpdate, setContactUpdate] = useState({});
 
   const dispatch = useDispatch();
 
@@ -41,19 +44,26 @@ export function ContactList() {
     const getContactId = evt.target.dataset.id;
     const getContactUpdate = items.find(el => el.id === getContactId);
 
-    setContactUpdate(getContactUpdate); // записал в state из items
+    dispatch(setContactUpdate(getContactUpdate)); // записал в state из items
+    // setContactUpdate(getContactUpdate); // записал в state из items
   };
 
   // запись в стейт из поля input
   const handleChange = evt => {
     if (evt.target.name === 'name')
-      setContactUpdate(
-        prev => (prev = { ...prev, ...{ name: evt.target.value } })
+      dispatch(
+        setContactUpdate({ ...contactUpdate, ...{ name: evt.target.value } })
       );
+    // setContactUpdate(
+    //   prev => (prev = { ...prev, ...{ name: evt.target.value } })
+    // );
     if (evt.target.name === 'number')
-      setContactUpdate(
-        prev => (prev = { ...prev, ...{ number: evt.target.value } })
+      dispatch(
+        setContactUpdate({ ...contactUpdate, ...{ number: evt.target.value } })
       );
+    // setContactUpdate(
+    //   prev => (prev = { ...prev, ...{ number: evt.target.value } })
+    // );
   };
 
   const handleContactCorrect = evt => {
