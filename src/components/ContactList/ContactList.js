@@ -49,16 +49,6 @@ export function ContactList() {
               <ButtonsSt>
                 <Button
                   variant="outlined"
-                  color="error"
-                  size="small"
-                  startIcon={<DeleteForeverIcon />}
-                  onClick={() => dispatch(deleteContactThunk(id))}
-                >
-                  Delete
-                </Button>
-
-                <Button
-                  variant="outlined"
                   startIcon={<UpdateIcon />}
                   size="small"
                   color="success"
@@ -66,6 +56,16 @@ export function ContactList() {
                   data-id={id}
                 >
                   update
+                </Button>
+
+                <Button
+                  variant="outlined"
+                  color="error"
+                  size="small"
+                  startIcon={<DeleteForeverIcon />}
+                  onClick={() => dispatch(deleteContactThunk(id))}
+                >
+                  Delete
                 </Button>
               </ButtonsSt>
             </WrapSt>

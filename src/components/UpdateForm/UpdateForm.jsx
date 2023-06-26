@@ -4,11 +4,26 @@ import { contactUpdateSelector } from 'redux/contacts/selectors';
 import { setContactUpdate, setIsUpdate } from 'redux/contacts/slice';
 import { FormSt, InputSt, LabelSt } from './Styled';
 import { Button } from '@mui/material';
+import { useEffect } from 'react';
 
 export const UpdateForm = () => {
   const dispatch = useDispatch();
 
   const contactUpdate = useSelector(contactUpdateSelector);
+
+  // закрыть форму по ESC
+  useEffect(() => {
+    function handleKeyDown(evt) {
+      if (evt.code === 'Escape') {
+        dispatch(setIsUpdate(false));
+      }
+    }
+    window.addEventListener('keydown', handleKeyDown);
+
+    return () => {
+      window.removeEventListener('keydown', handleKeyDown);
+    };
+  }, [dispatch]);
 
   // запись в стейт из поля input
   const handleChange = evt => {
