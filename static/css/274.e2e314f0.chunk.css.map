@@ -1,0 +1,1 @@
+{"version":3,"file":"static/css/274.e2e314f0.chunk.css","mappings":"AAAA,qBACE,eACF,CAEA,qBAEE,aAAc,CADd,cAEF","sources":["components/Filter/Filter.module.css"],"sourcesContent":[".label {\n  margin-top: 10px;\n}\n\n.input {\n  margin-top: 5px;\n  display: block;\n}"],"names":[],"sourceRoot":""}
