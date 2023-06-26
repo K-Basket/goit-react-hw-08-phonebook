@@ -15,9 +15,7 @@ const UserMenu = () => {
       <TextSt>
         Welcome, <span>{name}!</span> {`(${email})`}
       </TextSt>
-      {/* <button type="button" onClick={handleLogOut}>
-        Log out
-      </button> */}
+
       <Button
         variant="contained"
         onClick={handleLogOut}

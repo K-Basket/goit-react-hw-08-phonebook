@@ -4,7 +4,6 @@ export const ListSt = styled.ul`
   display: grid;
   gap: 5px;
   list-style: none;
-  margin: 0;
   padding: 0;
 `;
 

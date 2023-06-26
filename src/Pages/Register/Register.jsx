@@ -1,8 +1,10 @@
 import { useDispatch, useSelector } from 'react-redux';
-import css from './Register.module.css';
 import { registerThunk } from 'redux/auth/operations';
 import { Loader } from 'components/Loader/Loader';
 import { errorSelector, isLoadingSelector } from 'redux/auth/selectors';
+import { FormSt, LabelSt } from './Styled';
+import { Button } from '@mui/material';
+import Notiflix from 'notiflix';
 
 const Register = () => {
   const dispatch = useDispatch();
@@ -20,6 +22,11 @@ const Register = () => {
       password: form.elements.password.value,
     };
 
+    const { name, email, password } = userRegisterData;
+    if (name === '' || email === '' || password === '') {
+      return Notiflix.Notify.info('Please fill out the form.');
+    }
+
     dispatch(registerThunk(userRegisterData));
     form.reset();
 
@@ -30,21 +37,24 @@ const Register = () => {
     <>
       {isLoading && !error && <Loader />}
 
-      <form className={css.form} onSubmit={handleSubmit} autoComplete="off">
-        <label className={css.label}>
+      <FormSt onSubmit={handleSubmit} autoComplete="off">
+        <LabelSt>
           Username
           <input type="text" name="name" />
-        </label>
-        <label className={css.label}>
+        </LabelSt>
+        <LabelSt>
           Email
           <input type="email" name="email" />
-        </label>
-        <label className={css.label}>
+        </LabelSt>
+        <LabelSt>
           Password
           <input type="password" name="password" />
-        </label>
-        <button type="submit">Register</button>
-      </form>
+        </LabelSt>
+
+        <Button variant="contained" size="small" color="warning" type="submit">
+          Register
+        </Button>
+      </FormSt>
     </>
   );
 };

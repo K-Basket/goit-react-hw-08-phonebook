@@ -12,7 +12,7 @@ export function Loader() {
         height="50"
         width="50"
         radius="9"
-        color="gray"
+        color="#f57c00"
         ariaLabel="three-dots-loading"
         wrapperStyle={{}}
         wrapperClassName=""

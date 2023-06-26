@@ -7,20 +7,14 @@ const Home = () => {
 
   return (
     <>
-      <h3>Home page</h3>
       {isLoggetIn ? (
-        <p>{`Welcome to our site, ${name}!`}</p>
+        <div>
+          <h2>{`Welcome to our site, ${name}!`}</h2>
+          <p>Here you can create your phone book.</p>
+        </div>
       ) : (
         <p>Please register or login to your account.</p>
       )}
-
-      {/* <h1>Phonebook</h1>
-      <p>React Hooks & Redux toolkit (async) & User registration and login</p>
-      <ContactForm />
-
-      <h2>Contacts</h2>
-      <Filter />
-      <ContactList /> */}
     </>
   );
 };

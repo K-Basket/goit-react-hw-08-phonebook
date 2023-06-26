@@ -1,8 +1,10 @@
 import { useDispatch, useSelector } from 'react-redux';
-import css from './Login.module.css';
 import { loginThunk } from 'redux/auth/operations';
+import Notiflix from 'notiflix';
 import { errorSelector, isLoadingSelector } from 'redux/auth/selectors';
 import { Loader } from 'components/Loader/Loader';
+import { Button } from '@mui/material';
+import { FormSt, LabelSt } from 'Pages/Register/Styled';
 
 const Login = () => {
   const dispatch = useDispatch();
@@ -18,6 +20,12 @@ const Login = () => {
       email: form.elements.email.value,
       password: form.elements.password.value,
     };
+
+    const { email, password } = userLoginData;
+    if (email === '' || password === '') {
+      return Notiflix.Notify.info('Please fill out the form.');
+    }
+
     dispatch(loginThunk(userLoginData));
     form.reset();
 
@@ -28,17 +36,20 @@ const Login = () => {
     <>
       {isLoading && !error && <Loader />}
 
-      <form className={css.form} onSubmit={handleSubmit} autoComplete="off">
-        <label className={css.label}>
+      <FormSt onSubmit={handleSubmit} autoComplete="off">
+        <LabelSt>
           Email
           <input type="email" name="email" />
-        </label>
-        <label className={css.label}>
+        </LabelSt>
+        <LabelSt>
           Password
           <input type="password" name="password" />
-        </label>
-        <button type="submit">Log in</button>
-      </form>
+        </LabelSt>
+
+        <Button variant="contained" size="small" color="warning" type="submit">
+          Log in
+        </Button>
+      </FormSt>
     </>
   );
 };
