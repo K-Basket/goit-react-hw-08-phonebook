@@ -3,6 +3,7 @@ import { patchContactThunk } from 'redux/contacts/operations';
 import { contactUpdateSelector } from 'redux/contacts/selectors';
 import { setContactUpdate, setIsUpdate } from 'redux/contacts/slice';
 import { FormSt, InputSt, LabelSt } from './Styled';
+import { Button } from '@mui/material';
 
 export const UpdateForm = () => {
   const dispatch = useDispatch();
@@ -34,7 +35,7 @@ export const UpdateForm = () => {
     <>
       <FormSt onSubmit={handleContactCorrect}>
         <LabelSt>
-          Name update
+          change Name
           <InputSt
             type="text"
             name="name"
@@ -44,7 +45,7 @@ export const UpdateForm = () => {
         </LabelSt>
 
         <LabelSt>
-          Number update
+          change Number
           <InputSt
             type="tel"
             name="number"
@@ -53,7 +54,9 @@ export const UpdateForm = () => {
           />
         </LabelSt>
 
-        <button type="submit">Correct contact</button>
+        <Button variant="contained" size="small" color="success" type="submit">
+          Correct contact
+        </Button>
       </FormSt>
     </>
   );

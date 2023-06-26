@@ -1,9 +1,10 @@
 import Notiflix from 'notiflix';
-import css from './ContactForm.module.css';
 import { useDispatch, useSelector } from 'react-redux';
 import { itemsSelector } from 'redux/contacts/selectors';
 import { useState } from 'react';
 import { addContactThunk } from 'redux/contacts/operations';
+import { FormSt, InputSt, LabelSt } from './Styled';
+import { Button } from '@mui/material';
 
 export function ContactForm() {
   const [name, setName] = useState('');
@@ -42,11 +43,10 @@ export function ContactForm() {
   }
 
   return (
-    <form className={css.form} onSubmit={handleSubmit}>
-      <label className={css.label}>
+    <FormSt onSubmit={handleSubmit}>
+      <LabelSt>
         Name
-        <input
-          className={css.input}
+        <InputSt
           type="text"
           name="name"
           value={name}
@@ -55,12 +55,11 @@ export function ContactForm() {
           title="Name may contain only letters, apostrophe, dash and spaces. For example Adrian, Jacob Mercer, Charles de Batz de Castelmore d'Artagnan"
           required
         />
-      </label>
+      </LabelSt>
 
-      <label className={css.label}>
+      <LabelSt>
         Number
-        <input
-          className={css.input}
+        <InputSt
           type="tel"
           name="number"
           value={number}
@@ -69,11 +68,11 @@ export function ContactForm() {
           title="Phone number must be digits and can contain spaces, dashes, parentheses and can start with +"
           required
         />
-      </label>
+      </LabelSt>
 
-      <button className={css.btn} type="submit">
+      <Button variant="contained" size="small" color="success" type="submit">
         Add contact
-      </button>
-    </form>
+      </Button>
+    </FormSt>
   );
 }

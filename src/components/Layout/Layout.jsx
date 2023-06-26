@@ -4,7 +4,7 @@ import { useSelector } from 'react-redux';
 import { isLoggetInSelector } from 'redux/auth/selectors';
 import { Suspense } from 'react';
 import { Section } from 'components/Section/Section';
-import { NavLinkSt, NavSt } from './Styled';
+import { HeaderSt, NavLinkSt, NavSt } from './Styled';
 
 const { Outlet } = require('react-router-dom');
 
@@ -13,7 +13,7 @@ const Layout = () => {
 
   return (
     <>
-      <header>
+      <HeaderSt>
         <Section>
           <NavSt>
             <div>
@@ -23,7 +23,7 @@ const Layout = () => {
             {isLoggetIn ? <UserMenu /> : <AuthNav />}
           </NavSt>
         </Section>
-      </header>
+      </HeaderSt>
 
       <main>
         <Section>

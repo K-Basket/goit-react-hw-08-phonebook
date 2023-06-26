@@ -1,6 +1,12 @@
 import { NavLink } from 'react-router-dom';
 import styled from 'styled-components';
 
+export const HeaderSt = styled.header`
+  top: 0;
+  left: 0;
+  position: sticky;
+`;
+
 export const NavLinkSt = styled(NavLink)`
   padding: 8px 16px;
   text-decoration: none;

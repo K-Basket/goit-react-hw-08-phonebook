@@ -1,5 +1,4 @@
 import { useEffect } from 'react';
-import css from './ContactList.module.css';
 import { useDispatch, useSelector } from 'react-redux';
 import { itemsSelector, listSelector } from 'redux/contacts/selectors';
 import {
@@ -7,6 +6,10 @@ import {
   fetchContactsThunk,
 } from 'redux/contacts/operations';
 import { setContactUpdate, setIsUpdate } from 'redux/contacts/slice';
+import { ButtonsSt, ContactSt, ItemSt, ListSt, WrapSt } from './Styled';
+import { Button } from '@mui/material';
+import DeleteForeverIcon from '@mui/icons-material/DeleteForever';
+import UpdateIcon from '@mui/icons-material/Update';
 
 export function ContactList() {
   const items = useSelector(itemsSelector);
@@ -34,27 +37,41 @@ export function ContactList() {
 
   return (
     <>
-      <ul>
+      <ListSt>
         {getFiltered().map(({ id, name, number }) => (
-          <li className={css.link} key={id}>
-            <div className={css.item}>
-              <p>
-                <span>{name}</span>
-                <span>: {number}</span>
-              </p>
+          <ItemSt key={id}>
+            <WrapSt>
+              <ContactSt>
+                <p>{name}:</p>
+                <p> {number}</p>
+              </ContactSt>
 
-              <div>
-                <button onClick={() => dispatch(deleteContactThunk(id))}>
+              <ButtonsSt>
+                <Button
+                  variant="outlined"
+                  color="error"
+                  size="small"
+                  startIcon={<DeleteForeverIcon />}
+                  onClick={() => dispatch(deleteContactThunk(id))}
+                >
                   Delete
-                </button>
-                <button onClick={handleContactUpdate} data-id={id}>
-                  Update
-                </button>
-              </div>
-            </div>
-          </li>
+                </Button>
+
+                <Button
+                  variant="outlined"
+                  startIcon={<UpdateIcon />}
+                  size="small"
+                  color="success"
+                  onClick={handleContactUpdate}
+                  data-id={id}
+                >
+                  update
+                </Button>
+              </ButtonsSt>
+            </WrapSt>
+          </ItemSt>
         ))}
-      </ul>
+      </ListSt>
     </>
   );
 }

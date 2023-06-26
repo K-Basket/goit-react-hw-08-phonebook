@@ -1,13 +1,10 @@
 import styled from 'styled-components';
 
-// export const FormsContactsSt = styled.div`
-//   display: flex;
-// `;
-
 export const FormSt = styled.form`
   display: flex;
   align-items: end;
   gap: 15px;
+  margin-bottom: 25px;
 `;
 
 export const LabelSt = styled.label`
@@ -15,6 +12,6 @@ export const LabelSt = styled.label`
 `;
 
 export const InputSt = styled.input`
-  margin-top: 5px;
   display: block;
+  margin-top: 5px;
 `;

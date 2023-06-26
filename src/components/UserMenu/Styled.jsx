@@ -2,6 +2,7 @@ import styled from 'styled-components';
 
 export const UserMenuSt = styled.div`
   display: flex;
+  align-items: center;
 `;
 
 export const TextSt = styled.p`
