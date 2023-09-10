@@ -2,7 +2,8 @@
 import { createAsyncThunk } from '@reduxjs/toolkit';
 import axios from 'axios';
 
-axios.defaults.baseURL = 'https://connections-api.herokuapp.com/'; // ставим по дефолту базовы URL
+axios.defaults.baseURL = 'https://hw02-express.onrender.com'; // ставим по дефолту базовый URL
+// axios.defaults.baseURL = 'https://connections-api.herokuapp.com/'; // ставим по дефолту базовый URL
 
 // функция для авторизации (прикладывания токена) пользователя при запросах на backend.
 const setAuthHeader = token => {
