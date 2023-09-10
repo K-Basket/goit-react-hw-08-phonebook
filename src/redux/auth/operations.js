@@ -20,7 +20,7 @@ export const registerThunk = createAsyncThunk(
   'auth/register',
   async (credentials, thunkAPI) => {
     try {
-      const { data } = await axios.post('/users/signup', credentials);
+      const { data } = await axios.post('/api/auth/register', credentials);
       setAuthHeader(data.token); // прикладываем токен к http-запросу
 
       return data;
@@ -29,12 +29,27 @@ export const registerThunk = createAsyncThunk(
     }
   }
 );
+
+// // credentials (реквизиты для входа) -- сюда прилетает объект с данными из input
+// export const registerThunk = createAsyncThunk(
+//   'auth/register',
+//   async (credentials, thunkAPI) => {
+//     try {
+//       const { data } = await axios.post('/users/signup', credentials);
+//       setAuthHeader(data.token); // прикладываем токен к http-запросу
+
+//       return data;
+//     } catch (error) {
+//       return thunkAPI.rejectWithValue(error.message);
+//     }
+//   }
+// );
 
 export const loginThunk = createAsyncThunk(
   'auth/login',
   async (credentials, thunkAPI) => {
     try {
-      const { data } = await axios.post('/users/login', credentials);
+      const { data } = await axios.post('/api/auth/login', credentials);
       setAuthHeader(data.token); // прикладываем токен к http-запросу
 
       return data;
@@ -43,6 +58,20 @@ export const loginThunk = createAsyncThunk(
     }
   }
 );
+
+// export const loginThunk = createAsyncThunk(
+//   'auth/login',
+//   async (credentials, thunkAPI) => {
+//     try {
+//       const { data } = await axios.post('/users/login', credentials);
+//       setAuthHeader(data.token); // прикладываем токен к http-запросу
+
+//       return data;
+//     } catch (error) {
+//       return thunkAPI.rejectWithValue(error.message);
+//     }
+//   }
+// );
 
 export const logoutThunk = createAsyncThunk(
   'auth/logout',
