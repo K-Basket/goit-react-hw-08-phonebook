@@ -34,7 +34,7 @@ export const UpdateForm = () => {
       dispatch(setContactUpdate({ ...contactUpdate, ...{ name: value } }));
 
     if (inputName === 'number')
-      dispatch(setContactUpdate({ ...contactUpdate, ...{ number: value } }));
+      dispatch(setContactUpdate({ ...contactUpdate, ...{ phone: value } }));
   };
 
   const handleContactCorrect = evt => {
@@ -44,7 +44,7 @@ export const UpdateForm = () => {
     dispatch(setIsUpdate(false));
   };
 
-  const { name, number } = contactUpdate;
+  const { name, phone } = contactUpdate;
 
   return (
     <>
@@ -64,7 +64,7 @@ export const UpdateForm = () => {
           <InputSt
             type="tel"
             name="number"
-            placeholder={number}
+            placeholder={phone}
             onChange={handleChange}
           />
         </LabelSt>

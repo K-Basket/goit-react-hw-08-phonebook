@@ -30,20 +30,18 @@ const handleAddContact = (state, { payload }) => {
 const handlePatchContact = (state, { payload }) => {
   state.isLoading = false;
 
-  const { id, name, number } = payload;
-  const contact = state.items.find(el => el.id === id);
+  const { _id, name, phone } = payload;
+  const contact = state.items.find(el => el._id === _id);
 
   contact.name = name;
-  contact.number = number;
+  contact.phone = phone;
 
   state.error = '';
-
-  // console.log('payload Patch :>> ', payload);
 };
 
 const handleDelete = (state, { payload }) => {
   state.isLoading = false;
-  state.items = state.items.filter(el => el.id !== payload.id);
+  state.items = state.items.filter(el => el._id !== payload.id);
   state.error = '';
 };
 

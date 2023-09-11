@@ -34,7 +34,7 @@ export function ContactForm() {
 
     const newContact = {
       name: name,
-      number: number,
+      phone: number,
     };
 
     dispatch(addContactThunk(newContact)); // 💙💛 передаем данные контакта в createAsyncThunk для последующей отправки на backend

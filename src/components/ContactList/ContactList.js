@@ -29,7 +29,8 @@ export function ContactList() {
 
   const handleContactUpdate = evt => {
     const getContactId = evt.target.dataset.id;
-    const getContactUpdate = items.find(el => el.id === getContactId);
+    const getContactUpdate = items.find(el => el._id === getContactId);
+    console.log('getContactUpdate :>> ', getContactUpdate);
 
     dispatch(setIsUpdate(true));
     dispatch(setContactUpdate(getContactUpdate)); // записал в state из items
@@ -38,12 +39,12 @@ export function ContactList() {
   return (
     <>
       <ListSt>
-        {getFiltered().map(({ id, name, number }) => (
-          <ItemSt key={id}>
+        {getFiltered().map(({ _id, name, phone }) => (
+          <ItemSt key={_id}>
             <WrapSt>
               <ContactSt>
                 <p>{name}:</p>
-                <p> {number}</p>
+                <p> {phone}</p>
               </ContactSt>
 
               <ButtonsSt>
@@ -53,7 +54,7 @@ export function ContactList() {
                   size="small"
                   color="success"
                   onClick={handleContactUpdate}
-                  data-id={id}
+                  data-id={_id}
                 >
                   update
                 </Button>
@@ -63,7 +64,7 @@ export function ContactList() {
                   color="error"
                   size="small"
                   startIcon={<DeleteForeverIcon />}
-                  onClick={() => dispatch(deleteContactThunk(id))}
+                  onClick={() => dispatch(deleteContactThunk(_id))}
                 >
                   Delete
                 </Button>

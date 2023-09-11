@@ -2,8 +2,8 @@
 import { createAsyncThunk } from '@reduxjs/toolkit';
 import axios from 'axios';
 
+// axios.defaults.baseURL = 'http://localhost:3001'; // ставим по дефолту базовый URL
 axios.defaults.baseURL = 'https://hw02-express.onrender.com'; // ставим по дефолту базовый URL
-// axios.defaults.baseURL = 'https://connections-api.herokuapp.com/'; // ставим по дефолту базовый URL
 
 // функция для авторизации (прикладывания токена) пользователя при запросах на backend.
 const setAuthHeader = token => {
@@ -50,7 +50,9 @@ export const loginThunk = createAsyncThunk(
   async (credentials, thunkAPI) => {
     try {
       const { data } = await axios.post('/api/auth/login', credentials);
+      // console.log('dataLoginThunk :>> ', data);
       setAuthHeader(data.token); // прикладываем токен к http-запросу
+      // setAuthHeader(data.token); // прикладываем токен к http-запросу
 
       return data;
     } catch (error) {
@@ -77,7 +79,7 @@ export const logoutThunk = createAsyncThunk(
   'auth/logout',
   async (_, thunkAPI) => {
     try {
-      await axios.post('/users/logout');
+      await axios.post('/api/auth/logout');
       clearAuthHeader(); // очистка токина на бекенде
     } catch (error) {
       return thunkAPI.rejectWithValue(error.message);
@@ -99,7 +101,7 @@ export const refreshUserThunk = createAsyncThunk(
 
     try {
       setAuthHeader(token); // если user залогинен, прикладываем токен к http-запросу
-      const { data } = await axios.get('/users/current'); // http-запрос на refreshUser
+      const { data } = await axios.get('/api/auth/current'); // http-запрос на refreshUser
 
       return data;
     } catch (error) {

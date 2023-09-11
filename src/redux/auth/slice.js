@@ -16,16 +16,14 @@ const handleRejected = (state, { payload }) => {
 };
 
 const handleRegisterThunk = (state, { payload }) => {
-  state.user = payload.user; // записали в state name, email пользователя
+  state.user = { name: payload.name, email: payload.email }; // записали в state name, email пользователя
   state.token = payload.token; // записали в state token, token пользователя
   state.isLoggetIn = true;
   state.isLoading = false;
-
-  console.log('registerThunk/payload :>> ', payload);
 };
 
 const handleLoginThunk = (state, { payload }) => {
-  state.user = payload.user;
+  state.user = { name: payload.user, email: payload.email };
   state.token = payload.token;
   state.isLoggetIn = true;
   state.isLoading = false;
